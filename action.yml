@@ -1,10 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: Close matching issues
+description: Closes issues matching a query
+author: @lee-dohm
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  token:
+    description: Token to use to execute the search
+    required: true
+  query:
+    description: Query to use to search for matching issues
+    required: true
 runs:
-  using: 'node12'
-  main: 'lib/main.js'
+  using: node12
+  main: lib/main.js

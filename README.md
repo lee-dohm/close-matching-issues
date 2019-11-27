@@ -1,14 +1,6 @@
-# Create a JavaScript Action using TypeScript
+# Close Matching Issues Action
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
-
-This template includes compilication support, tests, a validation workflow, publishing, and versioning guidance.  
-
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
+A GitHub Action to close issues matching a query.
 
 ## Code in Master
 
@@ -51,9 +43,9 @@ import * as core from '@actions/core';
 ...
 
 async function run() {
-  try { 
+  try {
       ...
-  } 
+  }
   catch (error) {
     core.setFailed(error.message);
   }
@@ -66,7 +58,7 @@ See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/R
 
 ## Publish to a distribution branch
 
-Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case). 
+Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case).
 
 Comment out node_modules in .gitignore and create a releases/v1 branch
 ```bash
@@ -86,7 +78,7 @@ $ git commit -a -m "prod dependencies"
 $ git push origin releases/v1
 ```
 
-Your action is now published! :rocket: 
+Your action is now published! :rocket:
 
 See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
 
@@ -111,3 +103,7 @@ uses: actions/typescript-action@v1
 with:
   milliseconds: 1000
 ```
+
+## License
+
+[MIT](LICENSE.md)
