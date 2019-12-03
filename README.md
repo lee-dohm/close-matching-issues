@@ -4,7 +4,7 @@ A GitHub Action to close issues matching a query.
 
 ## Code in Master
 
-Install the dependencies  
+Install the dependencies
 ```bash
 $ npm install
 ```
@@ -14,7 +14,7 @@ Build the typescript
 $ npm run build
 ```
 
-Run the tests :heavy_check_mark:  
+Run the tests :heavy_check_mark:
 ```bash
 $ npm test
 
@@ -61,6 +61,7 @@ See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/R
 Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case).
 
 Comment out node_modules in .gitignore and create a releases/v1 branch
+
 ```bash
 # comment out in distribution branches
 # node_modules/

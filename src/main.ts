@@ -37,7 +37,17 @@ async function getIssueNumbers(octokit, searchQuery) {
 async function run() {
   try {
     const token = core.getInput('token')
+
+    if (!token) {
+      throw new Error('`token` is a required input parameter')
+    }
+
     const searchQuery = core.getInput('query')
+
+    if (!searchQuery) {
+      throw new Error('`query` is a required input parameter')
+    }
+
     const octokit = new github.GitHub(token)
 
     const issueNumbers = await getIssueNumbers(octokit, searchQuery)
