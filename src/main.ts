@@ -17,9 +17,13 @@ async function closeIssues(octokit, numbers) {
   const context = github.context
 
   return numbers.map(async number => {
-    core.debug(`Close https://github.com/${formatNameWithOwner(context.repo)}/issues/${number}`)
+    core.debug(
+      `Close https://github.com/${formatNameWithOwner(
+        context.repo
+      )}/issues/${number}`
+    )
 
-    return octokit.issues.update({...context.repo, state: 'closed'})
+    return octokit.issues.update({ ...context.repo, state: 'closed' })
   })
 }
 
@@ -29,7 +33,9 @@ function formatNameWithOwner(repo) {
 
 async function getIssueNumbers(octokit, searchQuery) {
   const context = github.context
-  const {data: data} = await octokit.graphql(query, {query: `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`})
+  const { data: data } = await octokit.graphql(query, {
+    query: `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`
+  })
 
   return data.search.nodes.map(issue => issue.number)
 }
@@ -54,7 +60,7 @@ async function run() {
 
     await closeIssues(octokit, issueNumbers)
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message)
   }
 }
 
