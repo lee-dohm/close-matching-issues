@@ -5,9 +5,11 @@
   "description": "A GitHub Action for closing issues matching a search query",
   "main": "lib/main.js",
   "scripts": {
-    "build": "npm run format && tsc",
+    "build": "tsc",
+    "ci": "npm run build && npm run test",
     "format": "prettier --write **/*.ts",
-    "test": "npm run build && jest"
+    "lint": "prettier --check **/*.ts",
+    "test": "npm run lint && jest"
   },
   "repository": {
     "type": "git",
