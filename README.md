@@ -18,10 +18,12 @@ Run the tests :heavy_check_mark:
 ```bash
 $ npm test
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+> typescript-action@0.0.0 test /Users/lee/Source/lee-dohm/close-matching-issues
+> jest
+
+ PASS  __tests__/main.test.ts
+  ✓ fails when no token is supplied (160ms)
+  ✓ fails when no query is supplied (125ms)
 
 ...
 ```
