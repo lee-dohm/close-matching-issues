@@ -23,7 +23,7 @@ async function closeIssues(octokit, numbers) {
       )}/issues/${number}`
     )
 
-    return octokit.issues.update({ ...context.repo, state: 'closed' })
+    return octokit.issues.update({ ...context.repo, issue_number: number, state: 'closed' })
   })
 }
 
