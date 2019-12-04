@@ -1,6 +1,5 @@
 name: Close matching issues
 description: Closes issues matching a query
-author: @lee-dohm
 inputs:
   token:
     description: Token to use to execute the search
