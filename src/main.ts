@@ -29,8 +29,12 @@ function formatNameWithOwner(repo) {
 
 async function getIssueNumbers(octokit, searchQuery) {
   const context = github.context
+  const queryText = `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`
+
+  core.debug(`Query: ${queryText}`)
+
   const { data: data } = await octokit.graphql(query, {
-    query: `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`
+    query: queryText
   })
 
   return data.search.nodes.map(issue => issue.number)
