@@ -2,8 +2,8 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 
 const query = `
-query($query: String!) {
-  search(first: 100, query: $query, type: ISSUE) {
+query($searchQuery: String!) {
+  search(first: 100, query: $searchQuery, type: ISSUE) {
     nodes {
       ... on Issue {
         number
@@ -33,9 +33,7 @@ async function getIssueNumbers(octokit, searchQuery) {
 
   core.debug(`Query: ${queryText}`)
 
-  const { data: data } = await octokit.graphql(query, {
-    query: queryText
-  })
+  const { data: data } = await octokit.graphql(query, { searchQuery: queryText })
 
   return data.search.nodes.map(issue => issue.number)
 }
