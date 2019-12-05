@@ -24,7 +24,7 @@ async function closeIssues(octokit, numbers) {
 }
 
 function formatNameWithOwner(repo) {
-  return `${repo.owner}/${repo.name}`
+  return `${repo.owner}/${repo.repo}`
 }
 
 async function getIssueNumbers(octokit, searchQuery) {
