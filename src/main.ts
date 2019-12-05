@@ -37,7 +37,7 @@ async function getIssueNumbers(octokit, searchQuery) {
 
   core.debug(`Results: ${JSON.stringify(results)}`)
 
-  return results.data.search.nodes.map(issue => issue.number)
+  return results.search.nodes.map(issue => issue.number)
 }
 
 async function run() {
