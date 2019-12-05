@@ -33,9 +33,11 @@ async function getIssueNumbers(octokit, searchQuery) {
 
   core.debug(`Query: ${queryText}`)
 
-  const { data: data } = await octokit.graphql(query, { searchQuery: queryText })
+  const results = await octokit.graphql(query, { searchQuery: queryText })
 
-  return data.search.nodes.map(issue => issue.number)
+  core.debug(`Results: ${JSON.stringify(results)}`)
+
+  return results.data.search.nodes.map(issue => issue.number)
 }
 
 async function run() {
