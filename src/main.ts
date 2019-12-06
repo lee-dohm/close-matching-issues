@@ -1,6 +1,8 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
+import { formatNameWithOwner } from './utils'
+
 const query = `
 query($searchQuery: String!) {
   search(first: 100, query: $searchQuery, type: ISSUE) {
@@ -21,10 +23,6 @@ async function closeIssues(octokit, numbers) {
 
     return octokit.issues.update({ ...context.repo, issue_number: number, state: 'closed' })
   })
-}
-
-export function formatNameWithOwner({ owner, repo }) {
-  return `${owner}/${repo}`
 }
 
 async function getIssueNumbers(octokit, searchQuery) {
