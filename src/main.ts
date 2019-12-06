@@ -25,7 +25,7 @@ async function closeIssues(octokit, numbers) {
   })
 }
 
-async function getIssueNumbers(octokit, searchQuery) {
+export async function getIssueNumbers(octokit, searchQuery) {
   const context = github.context
   const queryText = `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`
 
