@@ -1,4 +1,4 @@
-name: Close matching issues
+name: close-matching-issues
 description: Closes issues matching a query
 inputs:
   token:
