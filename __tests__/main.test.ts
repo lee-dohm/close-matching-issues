@@ -1,26 +1,9 @@
-import * as process from 'process'
-import * as cp from 'child_process'
-import * as path from 'path'
+import { formatNameWithOwner } from '../src/main'
 
-test('fails when no token is supplied', () => {
-  const ip = path.join(__dirname, '..', 'lib', 'main.js')
-  const options: cp.ExecSyncOptions = {
-    env: process.env
-  }
+describe('formatNameWithOwner', () => {
+  it('formats the text correctly', () => {
+    const text = formatNameWithOwner({ owner: 'owner-name', repo: 'repo-name' })
 
-  expect(() => {
-    cp.execSync(`node ${ip}`, options).toString()
-  }).toThrow()
-})
-
-test('fails when no query is supplied', () => {
-  process.env['INPUT_TOKEN'] = 'foobarbaz'
-  const ip = path.join(__dirname, '..', 'lib', 'main.js')
-  const options: cp.ExecSyncOptions = {
-    env: process.env
-  }
-
-  expect(() => {
-    cp.execSync(`node ${ip}`, options).toString()
-  }).toThrow()
+    expect(text).toBe('owner-name/repo-name')
+  })
 })
