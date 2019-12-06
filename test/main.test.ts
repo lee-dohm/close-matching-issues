@@ -8,10 +8,23 @@ import { getIssueNumbers } from '../src/main'
 // Suppress printing of debug statements
 jest.mock('@actions/core')
 
+let requestBody
+
+function graphqlNock(returnValue) {
+  nock('https://api.github.com')
+    .post('/graphql')
+    .reply(200, (_, body) => {
+      requestBody = body
+
+      return returnValue
+    })
+}
+
 describe('getIssueNumbers', () => {
-  let octokit, requestBody
   const mockToken = '1234567890abcdef'
   const testQuery = 'label:weekly-issue'
+
+  let octokit
 
   beforeEach(() => {
     Object.assign(process.env, {
@@ -23,32 +36,26 @@ describe('getIssueNumbers', () => {
   })
 
   it('returns the list of numbers', async () => {
-    nock('https://api.github.com')
-      .post('/graphql')
-      .reply(200, (_, body) => {
-        requestBody = body
-
-        return {
-          data: {
-            search: {
-              nodes: [
-                {
-                  number: 1219
-                },
-                {
-                  number: 1213
-                },
-                {
-                  number: 1207
-                },
-                {
-                  number: 1198
-                }
-              ]
+    graphqlNock({
+      data: {
+        search: {
+          nodes: [
+            {
+              number: 1219
+            },
+            {
+              number: 1213
+            },
+            {
+              number: 1207
+            },
+            {
+              number: 1198
             }
-          }
+          ]
         }
-      })
+      }
+    })
 
     const numbers = await getIssueNumbers(octokit, testQuery)
 
@@ -57,19 +64,13 @@ describe('getIssueNumbers', () => {
   })
 
   it('returns an empty array when no numbers are returned', async () => {
-    nock('https://api.github.com')
-      .post('/graphql')
-      .reply(200, (_, body) => {
-        requestBody = body
-
-        return {
-          data: {
-            search: {
-              nodes: []
-            }
-          }
+    graphqlNock({
+      data: {
+        search: {
+          nodes: []
         }
-      })
+      }
+    })
 
     const numbers = await getIssueNumbers(octokit, testQuery)
 
