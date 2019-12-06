@@ -1,5 +1,6 @@
 name: close-matching-issues
 description: Closes issues matching a query
+author: lee-dohm
 inputs:
   token:
     description: Token to use to execute the search
@@ -10,3 +11,6 @@ inputs:
 runs:
   using: node12
   main: lib/main.js
+branding:
+  icon: check-circle
+  color: red
