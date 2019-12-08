@@ -16,8 +16,8 @@ steps:
 
 ### Inputs
 
-* `query` -- GitHub search query that will match the issues that should be closed. **Note:** The search will automatically be scoped to the repository in which the Action is executing.
-* `token` -- Token to use to perform the search and close the issues. `GITHUB_TOKEN` has sufficient access to do this.
+* `query` **required** -- GitHub search query that will match the issues that should be closed. **Note:** The search will automatically be scoped to the repository in which the Action is executing.
+* `token` **required** -- Token to use to perform the search and close the issues. `GITHUB_TOKEN` has sufficient access to do this.
 
 ## License
 
