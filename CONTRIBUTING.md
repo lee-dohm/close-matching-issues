@@ -3,16 +3,19 @@
 ## Code in Master
 
 Install the dependencies
+
 ```bash
 $ npm install
 ```
 
 Build the typescript
+
 ```bash
 $ npm run build
 ```
 
 Run the tests :heavy_check_mark:
+
 ```bash
 $ npm test
 
@@ -58,7 +61,7 @@ See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/R
 
 ## Publish to a distribution branch
 
-Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case).
+Actions are run from GitHub repos. We will create a releases branch and only checkin production modules (core in this case).
 
 Comment out node_modules in .gitignore and create a releases/v1 branch
 

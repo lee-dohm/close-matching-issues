@@ -16,8 +16,8 @@ steps:
 
 ### Inputs
 
-* `query` **required** -- [GitHub search query](https://help.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests) that will match the issues that should be closed. **Note:** The search will automatically be scoped to the repository in which the Action is executing.
-* `token` **required** -- Token to use to perform the search and close the issues. `GITHUB_TOKEN` has sufficient access to do this.
+- `query` **required** -- [GitHub search query](https://help.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests) that will match the issues that should be closed. **Note:** The search will automatically be scoped to the repository in which the Action is executing.
+- `token` **required** -- Token to use to perform the search and close the issues. `GITHUB_TOKEN` has sufficient access to do this.
 
 ## License
 
