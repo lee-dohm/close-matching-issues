@@ -4,7 +4,7 @@ A GitHub Action to close issues in the repo in which the Action executes that ma
 
 ## Use
 
-Can be used to close issues that were opened by some previous workflow after they've served their purpose.
+Can be used to close issues or pull requests that were opened by some previous workflow after they've served their purpose.
 
 ```yaml
 steps:
