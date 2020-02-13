@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc",
     "ci": "npm run build && npm run test",
-    "format": "prettier --write **/*.ts",
-    "lint": "prettier --check **/*.ts",
+    "format": "prettier --write **/*.ts **/*.md **/*.yaml",
+    "lint": "prettier --check **/*.ts **/*.md **/*.yaml",
     "test": "npm run lint && jest"
   },
   "repository": {
