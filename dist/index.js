@@ -3539,7 +3539,12 @@ function getIssueNumbers(octokit, searchQuery) {
         core.debug(`Query: ${queryText}`);
         const results = yield octokit.graphql(query, { searchQuery: queryText });
         core.debug(`Results: ${JSON.stringify(results)}`);
-        return results.search.nodes.map(issue => issue.number);
+        if (results) {
+            return results.search.nodes.map((issue) => issue.number);
+        }
+        else {
+            return [];
+        }
     });
 }
 exports.getIssueNumbers = getIssueNumbers;
