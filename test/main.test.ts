@@ -1,16 +1,15 @@
 import nock from 'nock'
 
-import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-import { getIssueNumbers } from '../src/main'
+import { getIssueNumbers, GraphQlQueryResponseData } from '../src/main'
 
 // Suppress printing of debug statements
 jest.mock('@actions/core')
 
-let requestBody
+let requestBody: nock.Body
 
-function graphqlNock(returnValue) {
+function graphqlNock(returnValue: GraphQlQueryResponseData): void {
   nock('https://api.github.com')
     .post('/graphql')
     .reply(200, (_, body) => {
@@ -24,7 +23,7 @@ describe('getIssueNumbers', () => {
   const mockToken = '1234567890abcdef'
   const testQuery = 'label:weekly-issue'
 
-  let octokit
+  let octokit: github.GitHub
 
   beforeEach(() => {
     Object.assign(process.env, {
@@ -59,7 +58,9 @@ describe('getIssueNumbers', () => {
 
     const numbers = await getIssueNumbers(octokit, testQuery)
 
-    expect(requestBody.variables.searchQuery).toBe(`repo:test-owner/test-repo ${testQuery}`)
+    expect((requestBody as Record<string, any>).variables.searchQuery).toBe(
+      `repo:test-owner/test-repo ${testQuery}`
+    )
     expect(numbers).toStrictEqual([1219, 1213, 1207, 1198])
   })
 
@@ -74,7 +75,9 @@ describe('getIssueNumbers', () => {
 
     const numbers = await getIssueNumbers(octokit, testQuery)
 
-    expect(requestBody.variables.searchQuery).toBe(`repo:test-owner/test-repo ${testQuery}`)
+    expect((requestBody as Record<string, any>).variables.searchQuery).toBe(
+      `repo:test-owner/test-repo ${testQuery}`
+    )
     expect(numbers).toStrictEqual([])
   })
 })

@@ -3,6 +3,12 @@ import * as github from '@actions/github'
 
 import { formatNameWithOwner } from './utils'
 
+interface IssueNumber {
+  number: number
+}
+
+export type GraphQlQueryResponseData = { [key: string]: any } | null
+
 const query = `
 query($searchQuery: String!) {
   search(first: 100, query: $searchQuery, type: ISSUE) {
@@ -15,7 +21,7 @@ query($searchQuery: String!) {
 }
 `
 
-async function closeIssues(octokit, numbers) {
+async function closeIssues(octokit: github.GitHub, numbers: Array<number>) {
   const context = github.context
 
   return numbers.map(async number => {
@@ -25,17 +31,24 @@ async function closeIssues(octokit, numbers) {
   })
 }
 
-export async function getIssueNumbers(octokit, searchQuery) {
+export async function getIssueNumbers(
+  octokit: github.GitHub,
+  searchQuery: string
+): Promise<Array<number>> {
   const context = github.context
   const queryText = `repo:${formatNameWithOwner(context.repo)} ${searchQuery}`
 
   core.debug(`Query: ${queryText}`)
 
-  const results = await octokit.graphql(query, { searchQuery: queryText })
+  const results: GraphQlQueryResponseData = await octokit.graphql(query, { searchQuery: queryText })
 
   core.debug(`Results: ${JSON.stringify(results)}`)
 
-  return results.search.nodes.map(issue => issue.number)
+  if (results) {
+    return results.search.nodes.map((issue: IssueNumber) => issue.number)
+  } else {
+    return []
+  }
 }
 
 async function run() {
