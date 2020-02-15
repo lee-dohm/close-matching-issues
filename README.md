@@ -8,7 +8,7 @@ Can be used to close issues or pull requests that were opened by some previous w
 
 ```yaml
 steps:
-  - uses: lee-dohm/close-matching-issues@v1
+  - uses: lee-dohm/close-matching-issues@v2
     with:
       query: 'label:weekly-issue'
       token: ${{ secrets.GITHUB_TOKEN }}
