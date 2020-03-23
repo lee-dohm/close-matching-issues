@@ -24,7 +24,7 @@ query($searchQuery: String!) {
 async function closeIssues(octokit: github.GitHub, numbers: Array<number>) {
   const context = github.context
 
-  return numbers.map(async number => {
+  return numbers.map(async (number) => {
     core.debug(`Close https://github.com/${formatNameWithOwner(context.repo)}/issues/${number}`)
 
     return octokit.issues.update({ ...context.repo, issue_number: number, state: 'closed' })
