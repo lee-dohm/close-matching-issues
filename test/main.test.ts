@@ -28,7 +28,7 @@ describe('getIssueNumbers', () => {
   beforeEach(() => {
     Object.assign(process.env, {
       GITHUB_REPOSITORY: 'test-owner/test-repo',
-      GITHUB_ACTION: 'close-matching-issues'
+      GITHUB_ACTION: 'close-matching-issues',
     })
 
     octokit = new github.GitHub(mockToken)
@@ -40,20 +40,20 @@ describe('getIssueNumbers', () => {
         search: {
           nodes: [
             {
-              number: 1219
+              number: 1219,
             },
             {
-              number: 1213
+              number: 1213,
             },
             {
-              number: 1207
+              number: 1207,
             },
             {
-              number: 1198
-            }
-          ]
-        }
-      }
+              number: 1198,
+            },
+          ],
+        },
+      },
     })
 
     const numbers = await getIssueNumbers(octokit, testQuery)
@@ -68,9 +68,9 @@ describe('getIssueNumbers', () => {
     graphqlNock({
       data: {
         search: {
-          nodes: []
-        }
-      }
+          nodes: [],
+        },
+      },
     })
 
     const numbers = await getIssueNumbers(octokit, testQuery)
