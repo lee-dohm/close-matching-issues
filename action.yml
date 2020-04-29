@@ -1,6 +1,8 @@
 name: close-matching-issues
 description: Closes issues matching a query
-author: lee-dohm
+branding:
+  icon: check-circle
+  color: red
 inputs:
   token:
     description: Token to use to execute the search
@@ -11,6 +13,3 @@ inputs:
 runs:
   using: node12
   main: dist/index.js
-branding:
-  icon: check-circle
-  color: red
