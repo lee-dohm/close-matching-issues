@@ -1,12 +1,15 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
+import { GitHub } from '@actions/github/lib/utils'
+
 import { formatNameWithOwner } from './utils'
 
 interface IssueNumber {
   number: number
 }
 
+export type GitHubClient = InstanceType<typeof GitHub>
 export type GraphQlQueryResponseData = { [key: string]: any } | null
 
 const query = `
@@ -21,7 +24,7 @@ query($searchQuery: String!) {
 }
 `
 
-async function closeIssues(octokit: github.GitHub, numbers: Array<number>) {
+async function closeIssues(octokit: GitHubClient, numbers: Array<number>) {
   const context = github.context
 
   return numbers.map(async (number) => {
@@ -32,7 +35,7 @@ async function closeIssues(octokit: github.GitHub, numbers: Array<number>) {
 }
 
 export async function getIssueNumbers(
-  octokit: github.GitHub,
+  octokit: GitHubClient,
   searchQuery: string
 ): Promise<Array<number>> {
   const context = github.context
@@ -65,7 +68,7 @@ async function run() {
       throw new Error('`query` is a required input parameter')
     }
 
-    const octokit = new github.GitHub(token)
+    const octokit = github.getOctokit(token)
 
     const issueNumbers = await getIssueNumbers(octokit, searchQuery)
 
