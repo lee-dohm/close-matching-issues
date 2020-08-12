@@ -2,7 +2,7 @@ import nock from 'nock'
 
 import * as github from '@actions/github'
 
-import { getIssueNumbers, GraphQlQueryResponseData } from '../src/main'
+import { getIssueNumbers, GitHubClient, GraphQlQueryResponseData } from '../src/main'
 
 // Suppress printing of debug statements
 jest.mock('@actions/core')
@@ -23,7 +23,7 @@ describe('getIssueNumbers', () => {
   const mockToken = '1234567890abcdef'
   const testQuery = 'label:weekly-issue'
 
-  let octokit: github.GitHub
+  let octokit: GitHubClient
 
   beforeEach(() => {
     Object.assign(process.env, {
@@ -31,7 +31,7 @@ describe('getIssueNumbers', () => {
       GITHUB_ACTION: 'close-matching-issues',
     })
 
-    octokit = new github.GitHub(mockToken)
+    octokit = github.getOctokit(mockToken)
   })
 
   it('returns the list of numbers', async () => {
