@@ -34,7 +34,7 @@
     "jest": "^25.5.4",
     "jest-circus": "^26.4.2",
     "nock": "^13.0.4",
-    "prettier": "2.1.1",
+    "prettier": "2.1.2",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7"
   }
