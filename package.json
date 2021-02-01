@@ -33,7 +33,7 @@
     "@zeit/ncc": "^0.22.3",
     "jest": "^25.5.4",
     "jest-circus": "^26.6.3",
-    "nock": "^13.0.6",
+    "nock": "^13.0.7",
     "prettier": "2.2.1",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7"
