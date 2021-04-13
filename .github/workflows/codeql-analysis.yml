@@ -1,7 +1,10 @@
 name: Code scanning
 
 on:
+  pull_request:
   push:
+    branches:
+      - primary
   schedule:
     - cron: '0 23 * * 1'
 
