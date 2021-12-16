@@ -19,6 +19,9 @@ query($searchQuery: String!) {
       ... on Issue {
         number
       }
+      ... on PullRequest {
+        number
+      }
     }
   }
 }
