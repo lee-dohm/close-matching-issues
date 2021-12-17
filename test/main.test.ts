@@ -21,7 +21,8 @@ function graphqlNock(returnValue: GraphQlQueryResponseData): void {
 
 describe('getIssueNumbers', () => {
   const mockToken = '1234567890abcdef'
-  const testQuery = 'label:weekly-issue'
+  const issueTestQuery = 'type:issue label:weekly-issue'
+  const prTestQuery = 'type:pr label:monthly-rollup'
 
   let octokit: GitHubClient
 
@@ -34,7 +35,7 @@ describe('getIssueNumbers', () => {
     octokit = github.getOctokit(mockToken)
   })
 
-  it('returns the list of numbers', async () => {
+  it('returns the list of numbers for issues', async () => {
     graphqlNock({
       data: {
         search: {
@@ -56,12 +57,42 @@ describe('getIssueNumbers', () => {
       },
     })
 
-    const numbers = await getIssueNumbers(octokit, testQuery)
+    const numbers = await getIssueNumbers(octokit, issueTestQuery)
 
     expect((requestBody as Record<string, any>).variables.searchQuery).toBe(
-      `repo:test-owner/test-repo ${testQuery}`
+      `repo:test-owner/test-repo ${issueTestQuery}`
     )
     expect(numbers).toStrictEqual([1219, 1213, 1207, 1198])
+  })
+
+  it('returns the list of numbers for pull requests', async () => {
+    graphqlNock({
+      data: {
+        search: {
+          nodes: [
+            {
+              number: 1912,
+            },
+            {
+              number: 1312,
+            },
+            {
+              number: 1702,
+            },
+            {
+              number: 1891,
+            },
+          ],
+        },
+      },
+    })
+
+    const numbers = await getIssueNumbers(octokit, prTestQuery)
+
+    expect((requestBody as Record<string, any>).variables.searchQuery).toBe(
+      `repo:test-owner/test-repo ${prTestQuery}`
+    )
+    expect(numbers).toStrictEqual([1912, 1312, 1702, 1891])
   })
 
   it('returns an empty array when no numbers are returned', async () => {
@@ -73,10 +104,10 @@ describe('getIssueNumbers', () => {
       },
     })
 
-    const numbers = await getIssueNumbers(octokit, testQuery)
+    const numbers = await getIssueNumbers(octokit, issueTestQuery)
 
     expect((requestBody as Record<string, any>).variables.searchQuery).toBe(
-      `repo:test-owner/test-repo ${testQuery}`
+      `repo:test-owner/test-repo ${issueTestQuery}`
     )
     expect(numbers).toStrictEqual([])
   })
