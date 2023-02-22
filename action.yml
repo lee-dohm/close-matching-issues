@@ -11,5 +11,5 @@ inputs:
     description: Query to use to search for matching issues
     required: true
 runs:
-  using: node12
+  using: 'node16'
   main: dist/index.js
